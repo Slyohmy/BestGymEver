@@ -1,5 +1,6 @@
 package Inlämningsuppgift1;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,6 +23,7 @@ public class BestGymEver{
         String[] date;
         LocalDate dateNow = LocalDate.now();
         LocalDate dateMinusTwelveMonths = dateNow.minusMonths(12);
+        String inputDialog = JOptionPane.showInputDialog("Vänligen ange ett personnummer och namn:");
 
         try(PrintWriter writer = new PrintWriter(Files.newBufferedWriter(outFilePath));
             Scanner fileScanner = new Scanner(inFilePath)){
@@ -32,8 +34,16 @@ public class BestGymEver{
                     line2 = fileScanner.nextLine();
                     date = line2.split("--");
 
-                    if (dateNow.parse(date[0]).isAfter(dateMinusTwelveMonths)){
+                    if (dateNow.parse(date[0]).isAfter(dateMinusTwelveMonths)) {
                         writer.print(line1 + "\n" + line2 + "\n");
+
+                        if (line1.equals(inputDialog)) {
+                            JOptionPane.showMessageDialog(null, inputDialog
+                                    + " är medlem på BestGymEver.");
+                        }
+                        //TODO lyckas få till en else statement som printar ut "Inte medlem" 1 gång och inte 4.
+                        //else
+                        //    JOptionPane.showMessageDialog(null, "Inte medlem");
                     }
                 }
             }
@@ -47,8 +57,7 @@ public class BestGymEver{
             System.out.println("Failed to write to file.");
             e.printStackTrace();
             System.exit(0);
-        }
-        catch (Exception e){
+        } catch (Exception e){
             System.out.println("Something went wrong.");
             e.printStackTrace();
             System.exit(0);
