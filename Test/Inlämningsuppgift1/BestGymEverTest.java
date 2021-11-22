@@ -6,12 +6,14 @@ import static org.junit.Assert.*;
 
 public class BestGymEverTest {
 
+    BestGymEver bestGymEver = new BestGymEver();
+
     @Test
-    public final void bestGymEverTest(){
+    public void checkCurrentCustomers(){
 
-        //TODO Skapa några vettiga tester
+        bestGymEver.checkIfCustomerExist();
+        assertTrue(bestGymEver.getCurrentCustomer().size() > 0);
 
-        BestGymEver bestGymEver = new BestGymEver();
-        assertFalse(bestGymEver == null);
     }
 }
+
